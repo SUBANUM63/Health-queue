@@ -1,0 +1,91 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header nav {
+    padding: 10px 0;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+section {
+    padding: 20px;
+    text-align: center;
+}
+
+
+/* Responsive images and videos */
+.responsive-image {
+    max-width: 100%;
+    height: auto;
+    margin: 10px; /* Adjust as needed */
+    border: 2px solid #ccc; /* Optional: Add a border for better decoration */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for a 3D effect */
+}
+
+
+.responsive-video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Features section */
+#features {
+    text-align: center;
+}
+
+#features .feature {
+    display: inline-block;
+    width: 30%;
+    margin: 1%;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+@media (max-width: 768px) {
+    #features .feature {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/* Button styles */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.button:hover {
+    background-color: #555;
+}
