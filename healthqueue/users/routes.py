@@ -11,6 +11,19 @@ users = Blueprint('users', __name__)
 
 @users.route("/register", methods=['GET', 'POST'])
 def register():
+    """
+    Handle the registration of new users.
+
+    If the user is already authenticated, redirect them to the home page.
+    If the form is submitted and valid, hash the password, create a new user,
+    and add the user to the database. Flash a success message and redirect
+    to the login page. Render the registration template with the form.
+
+    Returns:
+        - Redirect to home page if already authenticated.
+        - Redirect to login page after successful registration.
+        - Render the registration page with the form.
+    """
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
     form = RegistrationForm()
@@ -26,6 +39,20 @@ def register():
 
 @users.route("/login", methods=['GET', 'POST'])
 def login():
+    """
+    Handle user login.
+
+    If the user is already authenticated, redirect them to the home page.
+    If the form is submitted and valid, check the user's email and password,
+    log the user in, and redirect them to the next page or home page. Flash
+    an error message if login is unsuccessful. Render the login template with
+    the form.
+
+    Returns:
+        - Redirect to home page if already authenticated.
+        - Redirect to the next page or home page after successful login.
+        - Render the login page with the form.
+    """
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
     form = LoginForm()
@@ -42,6 +69,14 @@ def login():
 
 @users.route("/logout")
 def logout():
+    """
+    Handle user logout.
+
+    Log the user out and redirect them to the home page.
+
+    Returns:
+        - Redirect to home page after logout.
+    """
     logout_user()
     return redirect(url_for('main.home'))
 
@@ -49,6 +84,19 @@ def logout():
 @users.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
+    """
+    Handle account updates for logged-in users.
+
+    If the form is submitted and valid, update the user's username and email,
+    and save the profile picture if provided. Flash a success message and
+    redirect to the account page. Prepopulate the form fields with the current
+    user's information when the page is loaded. Render the account template with
+    the form and user's profile picture.
+
+    Returns:
+        - Redirect to account page after successful update.
+        - Render the account page with the form and profile picture.
+    """
     form = UpdateAccountForm()
     if form.validate_on_submit():
         if form.picture.data:
@@ -69,6 +117,19 @@ def account():
 
 @users.route("/user/<string:username>")
 def user_queues(username):
+    """
+    Display the queues of a specific user.
+
+    Fetch the user by username and paginate their queues, ordered by
+    the date they were queued. Render the user_queues template with the
+    user's queues and user information.
+
+    Args:
+        - username: The username of the user whose queues are to be displayed.
+
+    Returns:
+        - Render the user_queues page with the user's queues and information.
+    """
     page = request.args.get('page', 1, type=int)
     user = User.query.filter_by(username=username).first_or_404()
     queues = Queue.query.filter_by(author=user)\
@@ -79,6 +140,19 @@ def user_queues(username):
 
 @users.route("/reset_password", methods=['GET', 'POST'])
 def reset_request():
+    """
+    Handle password reset requests.
+
+    If the user is already authenticated, redirect them to the home page.
+    If the form is submitted and valid, send a password reset email to the
+    user's email address. Flash an informational message and redirect to the
+    login page. Render the reset_request template with the form.
+
+    Returns:
+        - Redirect to home page if already authenticated.
+        - Redirect to login page after requesting a password reset.
+        - Render the reset_request page with the form.
+    """
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
     form = RequestResetForm()
@@ -92,6 +166,25 @@ def reset_request():
 
 @users.route("/reset_password/<token>", methods=['GET', 'POST'])
 def reset_token(token):
+    """
+    Handle password resets using a token.
+
+    If the user is already authenticated, redirect them to the home page.
+    Verify the reset token and fetch the user. If the token is invalid or expired,
+    flash a warning message and redirect to the reset_request page. If the form is
+    submitted and valid, update the user's password and save it to the database.
+    Flash a success message and redirect to the login page. Render the reset_token
+    template with the form.
+
+    Args:
+        - token: The token used to verify the password reset request.
+
+    Returns:
+        - Redirect to home page if already authenticated.
+        - Redirect to reset_request page if the token is invalid or expired.
+        - Redirect to login page after successful password reset.
+        - Render the reset_token page with the form.
+    """
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
     user = User.verify_reset_token(token)

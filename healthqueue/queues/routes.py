@@ -1,3 +1,20 @@
+"""
+queues
+
+This module defines the queues Blueprint for the application, handling
+queue creation, viewing, update, and deletion functionalities.
+
+Functions:
+    new_queue(): Renders the queue creation form, processes submission,
+                 creates a new Queue object, and redirects to the home page.
+    queue(queue_id): Retrieves a Queue object by ID, renders its details.
+    update_queue(queue_id): Retrieves a Queue object, renders the update form,
+                             processes submission, updates the object, and redirects
+                             to the queue details page.
+    delete_queue(queue_id): Retrieves a Queue object, deletes it, and redirects
+                            to the home page.
+"""
+
 from flask import (render_template, url_for, flash,
                    redirect, request, abort, Blueprint)
 from flask_login import current_user, login_required
@@ -11,6 +28,12 @@ queues = Blueprint('queues', __name__)
 @queues.route("/queue/new", methods=['GET', 'POST'])
 @login_required
 def new_queue():
+    """Renders the queue creation form, processes submission, creates a new
+    Queue object, and redirects to the home page.
+
+    Returns:
+        str: The rendered queue creation template with form.
+    """
     form = QueueForm()
     if form.validate_on_submit():
         queue = Queue(title=form.title.data, content=form.content.data, author=current_user)
@@ -24,6 +47,14 @@ def new_queue():
 
 @queues.route("/queue/<int:queue_id>")
 def queue(queue_id):
+    """Retrieves a Queue object by ID, renders its details.
+
+    Args:
+        queue_id (int): The ID of the Queue object to retrieve.
+
+    Returns:
+        str: The rendered queue details template.
+    """
     queue = Queue.query.get_or_404(queue_id)
     return render_template('queue.html', title=queue.title, queue=queue)
 
@@ -31,6 +62,15 @@ def queue(queue_id):
 @queues.route("/queue/<int:queue_id>/update", methods=['GET', 'POST'])
 @login_required
 def update_queue(queue_id):
+    """Retrieves a Queue object, renders the update form, processes submission,
+    updates the object, and redirects to the queue details page.
+
+    Args:
+        queue_id (int): The ID of the Queue object to update.
+
+    Returns:
+        str: The rendered queue update template with form.
+    """
     queue = Queue.query.get_or_404(queue_id)
     if queue.author != current_user:
         abort(403)
@@ -51,6 +91,14 @@ def update_queue(queue_id):
 @queues.route("/queue/<int:queue_id>/delete", methods=['POST'])
 @login_required
 def delete_queue(queue_id):
+    """Retrieves a Queue object, deletes it, and redirects to the home page.
+
+    Args:
+        queue_id (int): The ID of the Queue object to delete.
+
+    Returns:
+        str: Redirection to the home page.
+    """
     queue = Queue.query.get_or_404(queue_id)
     if queue.author != current_user:
         abort(403)

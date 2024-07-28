@@ -7,6 +7,20 @@ from healthqueue.models import User
 
 
 class RegistrationForm(FlaskForm):
+    """
+    Form for users to create a new account.
+
+    Fields:
+        - username: Username with length constraints.
+        - email: Email address with validation.
+        - password: Password for the account.
+        - confirm_password: Confirmation of the password, must match the password.
+        - submit: Submit button to register the account.
+
+    Methods:
+        - validate_username: Custom validator to check if the username is already taken.
+        - validate_email: Custom validator to check if the email is already taken.
+    """
     username = StringField('Username',
                            validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email',
@@ -28,6 +42,15 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
+    """
+    Form for users to log in.
+
+    Fields:
+        - email: Email address with validation.
+        - password: Password for the account.
+        - remember: Checkbox to remember the user.
+        - submit: Submit button to log in.
+    """
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -36,6 +59,19 @@ class LoginForm(FlaskForm):
 
 
 class UpdateAccountForm(FlaskForm):
+    """
+    Form for users to update their account information.
+
+    Fields:
+        - username: Username with length constraints.
+        - email: Email address with validation.
+        - picture: Profile picture file upload.
+        - submit: Submit button to update the account.
+
+    Methods:
+        - validate_username: Custom validator to check if the username is already taken.
+        - validate_email: Custom validator to check if the email is already taken.
+    """
     username = StringField('Username',
                            validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email',
@@ -57,6 +93,16 @@ class UpdateAccountForm(FlaskForm):
 
 
 class RequestResetForm(FlaskForm):
+    """
+    Form for users to request a password reset.
+
+    Fields:
+        - email: Email address with validation.
+        - submit: Submit button to request the password reset.
+
+    Methods:
+        - validate_email: Custom validator to check if the email is associated with an account.
+    """
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
     submit = SubmitField('Request Password Reset')
@@ -68,6 +114,14 @@ class RequestResetForm(FlaskForm):
 
 
 class ResetPasswordForm(FlaskForm):
+    """
+    Form for users to reset their password.
+
+    Fields:
+        - password: New password for the account.
+        - confirm_password: Confirmation of the new password, must match the password.
+        - submit: Submit button to reset the password.
+    """
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',
                                      validators=[DataRequired(), EqualTo('password')])
