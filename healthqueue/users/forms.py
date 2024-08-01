@@ -1,3 +1,31 @@
+#!/usr/bin/python
+"""
+This module defines the forms used for user-related actions in the HealthQueue application.
+
+Imports:
+    - FlaskForm: Base class for creating forms with Flask-WTF.
+    - FileField: Field for uploading files.
+    - FileAllowed: Validator for allowed file extensions.
+    - StringField: Field for entering string data.
+    - PasswordField: Field for entering password data.
+    - SubmitField: Field for form submission.
+    - BooleanField: Field for boolean (True/False) values.
+    - DataRequired: Validator to ensure field data is provided.
+    - Length: Validator to ensure field data length constraints.
+    - Email: Validator to ensure a valid email address.
+    - EqualTo: Validator to ensure field data matches another field's data.
+    - ValidationError: Exception raised during validation errors.
+    - current_user: Represents the currently logged-in user.
+    - User: User model for querying user data.
+
+Classes:
+    - RegistrationForm: Form for user registration.
+    - LoginForm: Form for user login.
+    - UpdateAccountForm: Form for updating user account information.
+    - RequestResetForm: Form for requesting a password reset.
+    - ResetPasswordForm: Form for resetting a password.
+"""
+
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField

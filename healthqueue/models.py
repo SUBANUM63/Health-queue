@@ -1,3 +1,16 @@
+#!/usr/bin/python
+"""
+This module defines the database models for the HealthQueue application.
+
+Imports:
+    - datetime: Provides classes for manipulating dates and times.
+    - URLSafeTimedSerializer: Provides a timed URL-safe serializer for generating tokens.
+    - current_app: Proxy to the application handling the current request.
+    - db: Database instance from the HealthQueue application.
+    - login_manager: Login manager instance from the HealthQueue application.
+    - UserMixin: Provides default implementations for the methods that Flask-Login expects user objects to have.
+"""
+
 from datetime import datetime
 from itsdangerous.url_safe import URLSafeTimedSerializer as Serializer
 from flask import current_app

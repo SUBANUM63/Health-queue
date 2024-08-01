@@ -1,14 +1,16 @@
+#!/usr/bin/python3
 """
-QueueForm
+This module defines the forms used in the HealthQueue application.
 
-This class represents a Flask-WTF form for queuing a patient.
+Classes:
+    - QueueForm: A form for creating and updating queue entries.
 
-Attributes:
-    title (wtforms.StringField): A StringField representing the patient's name.
-        Required by DataRequired validator.
-    content (wtforms.TextAreaField): A TextAreaField representing the desired examination types.
-        Required by DataRequired validator.
-    submit (wtforms.SubmitField): A SubmitField for submitting the form.
+Imports:
+    - FlaskForm: Base form class from Flask-WTF.
+    - StringField: A field for input of string values.
+    - SubmitField: A field for form submission.
+    - TextAreaField: A field for input of multi-line text.
+    - DataRequired: A validator ensuring data is provided.
 """
 
 from flask_wtf import FlaskForm

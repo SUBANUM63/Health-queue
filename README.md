@@ -39,11 +39,11 @@ Health Queue is a web-based application designed to streamline the patient queue
    - Run the Application:
    - you can initialize the data base by running:
    ```bash
-   python3 init_db.py
+   python3 ./init_db.py
    ``` 
 5. **Run the Application**:
    ```bash
-   python3 run.py
+   python3 ./run.py
    ```
 # Usage
 - **Admin Panel**: Access the admin panel to manage the system settings, view reports, and handle patient queues.

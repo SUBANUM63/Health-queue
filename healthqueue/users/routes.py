@@ -1,3 +1,44 @@
+#!/usr/bin/python
+"""
+This module handles the user-related routes and functionality for the HealthQueue application.
+
+Routes:
+    - /register: Handles user registration.
+    - /login: Handles user login.
+    - /logout: Logs out the current user.
+    - /account: Displays and allows updating of the current user's account information.
+    - /user/<string:username>: Displays the queues created by a specific user.
+    - /reset_password: Handles password reset requests.
+    - /reset_password/<token>: Handles the reset password functionality using a token.
+
+Imports:
+    - render_template: Renders templates for the web application.
+    - url_for: Generates URLs for the web application.
+    - flash: Displays flash messages to the user.
+    - redirect: Redirects the user to a different route.
+    - request: Handles HTTP requests.
+    - Blueprint: Creates a blueprint for user-related routes.
+    - login_user: Logs in a user.
+    - current_user: Represents the currently logged-in user.
+    - logout_user: Logs out the current user.
+    - login_required: Ensures that a route can only be accessed by logged-in users.
+    - db: Database instance for SQLAlchemy.
+    - bcrypt: Bcrypt instance for password hashing.
+    - User: User model.
+    - Queue: Queue model.
+    - RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm: Forms for user-related actions.
+    - save_picture, send_reset_email: Utility functions for saving profile pictures and sending reset emails.
+
+Functions:
+    - register: Handles user registration.
+    - login: Handles user login.
+    - logout: Logs out the current user.
+    - account: Displays and allows updating of the current user's account information.
+    - user_queues: Displays the queues created by a specific user.
+    - reset_request: Handles password reset requests.
+    - reset_token: Handles the reset password functionality using a token.
+"""
+
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 from healthqueue import db, bcrypt

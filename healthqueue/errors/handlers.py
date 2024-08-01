@@ -1,3 +1,8 @@
+#!/usr/bin/python
+"""
+This Module script is for handling errors on the health queue flask application
+"""
+
 from flask import Blueprint, render_template
 
 errors = Blueprint('errors', __name__)

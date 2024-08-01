@@ -1,3 +1,25 @@
+#!/usr/bin/python
+"""
+This module initializes and configures the Flask application for the HealthQueue project.
+
+Modules:
+    Flask: The Flask web framework.
+    SQLAlchemy: Flask extension for SQLAlchemy integration.
+    Bcrypt: Flask extension for Bcrypt hashing.
+    LoginManager: Flask extension for user session management.
+    Mail: Flask extension for sending emails.
+    Config: Configuration class for the application settings.
+
+Attributes:
+    db (SQLAlchemy): Instance of SQLAlchemy for database operations.
+    bcrypt (Bcrypt): Instance of Bcrypt for password hashing.
+    login_manager (LoginManager): Instance of LoginManager for managing user sessions.
+    mail (Mail): Instance of Mail for sending emails.
+
+Functions:
+    create_app(config_class=Config): Creates and configures the Flask application.
+"""
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
@@ -15,6 +37,15 @@ mail = Mail()
 
 
 def create_app(config_class=Config):
+    """
+    Creates and configures the Flask application.
+
+    Args:
+        config_class (class): The configuration class to use for the application settings.
+
+    Returns:
+        Flask: The configured Flask application instance.
+    """
     app = Flask(__name__)
     app.config.from_object(Config)
 

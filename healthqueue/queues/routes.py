@@ -1,18 +1,20 @@
+#!/usr/bin/python
 """
-queues
+This module defines the routes for handling queue-related actions in the HealthQueue application.
 
-This module defines the queues Blueprint for the application, handling
-queue creation, viewing, update, and deletion functionalities.
-
-Functions:
-    new_queue(): Renders the queue creation form, processes submission,
-                 creates a new Queue object, and redirects to the home page.
-    queue(queue_id): Retrieves a Queue object by ID, renders its details.
-    update_queue(queue_id): Retrieves a Queue object, renders the update form,
-                             processes submission, updates the object, and redirects
-                             to the queue details page.
-    delete_queue(queue_id): Retrieves a Queue object, deletes it, and redirects
-                            to the home page.
+Imports:
+    - render_template: Renders a template with the given context.
+    - url_for: Generates URLs to the given endpoint.
+    - flash: Displays a message to the user.
+    - redirect: Redirects the user to a different endpoint.
+    - request: Handles request data in routes.
+    - abort: Aborts a request with a given status code.
+    - Blueprint: Registers a group of routes.
+    - current_user: Gets the currently logged-in user.
+    - login_required: Ensures a route is accessed only by logged-in users.
+    - db: Database instance from the HealthQueue application.
+    - Queue: Queue model from the HealthQueue application.
+    - QueueForm: Form for creating and updating queue entries.
 """
 
 from flask import (render_template, url_for, flash,

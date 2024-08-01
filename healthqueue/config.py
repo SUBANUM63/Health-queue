@@ -1,3 +1,8 @@
+#!/usr/bin/python
+"""
+ Module for Configuration of the Flask application.
+"""
+
 import os
 
 

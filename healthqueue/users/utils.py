@@ -1,3 +1,20 @@
+#!/usr/bin/python
+"""
+This module provides utility functions for the HealthQueue application.
+
+Functions:
+    - save_picture: Saves and resizes a user's profile picture.
+    - send_reset_email: Sends an email to reset a user's password.
+
+Imports:
+    - os: Provides a portable way of using operating system-dependent functionality.
+    - secrets: Provides access to the most secure source of randomness.
+    - Image: Class from the PIL (Pillow) library to handle image processing.
+    - url_for: Generates URLs for the application.
+    - current_app: Represents the current Flask application.
+    - Message: Class from Flask-Mail to handle email messages.
+    - mail: Instance of the Mail class from Flask-Mail, initialized in the main application.
+"""
 
 import os
 import secrets
